@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoML - Automated Machine Learning</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <h1>⚡ AutoML <span class="badge">Pro</span></h1>
+            </div>
+            <p class="subtitle">Upload your dataset, and let AI do the rest.</p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Step 1: Upload Section -->
+            <section id="upload-section" class="card fade-in">
+                <h2>1. Upload Dataset</h2>
+                <div class="upload-area" id="drop-zone">
+                    <input type="file" id="fileInput" accept=".csv" hidden>
+                    <div class="icon">📂</div>
+                    <p>Drag & Drop CSV here or <span>Browse</span></p>
+                    <p class="file-info" id="fileName">No file selected</p>
+                </div>
+                
+                <div class="form-group hidden" id="target-selection">
+                    <label for="targetColumn">Target Column Name (Case Sensitive)</label>
+                    <input type="text" id="targetColumn" placeholder="e.g., Survived, Price, label">
+                </div>
+
+                <button id="startBtn" class="btn-primary" disabled>Start AutoML 🚀</button>
+            </section>
+
+            <!-- Loading Section -->
+            <section id="loading-section" class="hidden">
+                <div class="loader-content">
+                    <div class="spinner"></div>
+                    <h3>Training Models...</h3>
+                    <p id="loading-text">Cleaning Data...</p>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="result-section" class="hidden">
+                
+                <!-- Summary Cards -->
+                <div class="summary-grid">
+                    <div class="card stat-card">
+                        <h3>Problem Type</h3>
+                        <p id="problem-type" class="highlight">DETECTING...</p>
+                    </div>
+                    <div class="card stat-card">
+                        <h3>Best Model</h3>
+                        <p id="best-model-name" class="highlight">-</p>
+                    </div>
+                    <div class="card stat-card">
+                        <h3>Best Score</h3>
+                        <p id="best-model-score" class="highlight">-</p>
+                    </div>
+                </div>
+
+                <!-- Leaderboard -->
+                <div class="card result-card">
+                    <h2>🏆 Model Leaderboard</h2>
+                    <div class="table-container">
+                        <table id="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Model Name</th>
+                                    <th>Score</th>
+                                    <th>Metrics</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-grid">
+                    <div class="card chart-card">
+                        <h3>Model Comparison</h3>
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                    <div class="card chart-card">
+                        <h3>Feature Importance</h3>
+                        <canvas id="featureChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="actions">
+                    <button class="btn-secondary" onclick="location.reload()">Start Over</button>
+                    <!-- <a href="/download_model" class="btn-primary">Download Best Model ⬇️</a> -->
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Powered by <strong>Antigravity AI</strong> | Automated Machine Learning Engine</p>
+        </footer>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
